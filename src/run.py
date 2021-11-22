@@ -444,7 +444,8 @@ def main():
     logger = get_logger(args, accelerator)
     raw_datasets, label_list, num_labels = get_dataset(args)
     tokenizer, model = get_model(args, num_labels)
-    train_dataset, eval_dataset, test_dataset, data_collator, eval_data_collator = preprocess(args, model, tokenizer, raw_datasets, num_labels, label_list, logger, accelerator)
+    train_dataset, eval_dataset, test_dataset, data_collator, eval_data_collator = preprocess(
+        args, model, tokenizer, raw_datasets, num_labels, label_list, logger, accelerator)
     
     if args.external_ratio > 1:
         raw_external_dataset = get_external_dataset(args)
