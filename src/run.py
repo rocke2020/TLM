@@ -411,6 +411,7 @@ def preprocess(args, model, tokenizer, raw_datasets, num_labels, label_list, log
     processed_datasets = raw_datasets.map(
         preprocess_function,
         batched=True,
+        # column_names: ['Unnamed: 0', 'text', 'id', 'label']
         remove_columns=raw_datasets["train"].column_names,
         load_from_cache_file=False,
         desc="Running tokenizer on dataset",
