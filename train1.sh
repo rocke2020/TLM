@@ -7,7 +7,7 @@ EXTERNAL_RATIO=999
 LR=1e-4
 WD=0.01
 WARMUP=10000
-dataset_dir=/home/videt/data2/corpus/nlp_corpus/tlm
+dataset_dir=/data2/corpus/nlp_corpus/tlm
 
 if [[ $TASK == "imdb" ]]
 then
