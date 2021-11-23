@@ -24,12 +24,12 @@ accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src
     --steps_to_save 50000 \
     --steps_to_log 100 \
     --external_dataset_name small_external.csv \
-    --preprocessing_num_workers 32 \
+    --preprocessing_num_workers 4 \
     --max_length $MAXLEN \
     --max_ckpts_to_keep 3 \
     --pad_to_max_length \
     --config_dir yxchar/tlm-${TASK}-${SCALE}-scale \
-    --dataset_dir $dataset_dir
+    --dataset_dir $dataset_dir \
     --from_scratch \
     --output_dir $OUTPUT_DIR/$SAVENAME \
     --per_device_train_batch_size 16 \
@@ -42,4 +42,4 @@ accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src
     --mask_task \
     --weight_decay $WD \
     --learning_rate $LR \
-    --num_warmup_steps $WARMUPj
+    --num_warmup_steps $WARMUP
