@@ -32,9 +32,9 @@ accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src
     --dataset_dir $dataset_dir
     --from_scratch \
     --output_dir $OUTPUT_DIR/$SAVENAME \
-    --per_device_train_batch_size 32 \
+    --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
-    --cuda_devices 0,1,2,3,4,5,6,7 \
+    --cuda_devices 0 \
     --task_name $TASK \
     --save_final \
     --mlm_weight $MLM_WEIGHT \
