@@ -43,7 +43,7 @@ from transformers import (
 from transformers.utils.versions import require_version
 from collator import DataCollatorForLanguageModeling
 from model import BertForMaskedLM
-from trainer import Trainer
+from trainer_no_accelerator import Trainer
 
 # label num for each task
 dapt_tasks = {

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 TASK=sciie
 SCALE=small
 OUTPUT_DIR=./results
@@ -19,7 +20,7 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-src/run.py \
+python src/run_no_accelerator.py \
     --max_train_steps 150000 \
     --steps_to_eval 100000 \
     --steps_to_save 50000 \
