@@ -1,3 +1,4 @@
+#!/bin/bash
 TASK=sciie
 SCALE=small
 OUTPUT_DIR=./results
@@ -18,7 +19,7 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src/run.py \
+src/run.py \
     --max_train_steps 150000 \
     --steps_to_eval 100000 \
     --steps_to_save 50000 \

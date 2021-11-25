@@ -18,7 +18,6 @@ class Trainer:
                  eval_dataloader,
                  external_dataloader,
                  logger,
-                 accelerator,
                  metric,
                  label_list,
                  tokenizer,
@@ -38,12 +37,11 @@ class Trainer:
         self.completed_steps = 0
         self.best_metric = 0.0
         self.test_results = 0.0
-        self.accelerator = accelerator
         self.label_list = label_list
         self.metric = metric
         self.tokenizer = tokenizer
         self.writter = None
-        if self.accelerator.is_main_process and self.args.output_dir is not None:
+        if self.args.output_dir is not None:
             summary_path = os.path.join(self.args.output_dir, "summary")
             if os.path.exists(summary_path):
                 shutil.rmtree(summary_path)
@@ -64,9 +62,10 @@ class Trainer:
         if save_path is None:
             save_path = self.args.output_dir
         
-        if self.accelerator.is_main_process:
-           unwrapped_model = self.accelerator.unwrap_model(self.model)
-           unwrapped_model.save_pretrained(save_path, save_function=self.accelerator.save)
+        model_to_save = (
+            self.model.module if hasattr(self.model, "module") else self.model
+        )  # Take care of distributed/parallel training
+        model_to_save.save_pretrained(save_path)
 
     def _save_trained(self):
         self._save_model()
