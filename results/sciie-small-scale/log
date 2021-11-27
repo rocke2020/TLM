@@ -28,3 +28,15 @@
 2021-11-27 22:09:12,675 - INFO - __main__ - step 1500, learning rate 1.5e-05, average loss 7.18135929107666
 2021-11-27 22:10:26,630 - INFO - __main__ - step 1600, learning rate 1.6000000000000003e-05, average loss 6.981876373291016
 2021-11-27 22:11:40,588 - INFO - __main__ - step 1700, learning rate 1.7000000000000003e-05, average loss 7.183238506317139
+2021-11-27 22:12:54,536 - INFO - __main__ - step 1800, learning rate 1.8e-05, average loss 6.984765529632568
+2021-11-27 22:14:08,464 - INFO - __main__ - step 1900, learning rate 1.9e-05, average loss 7.1397294998168945
+2021-11-27 22:15:22,413 - INFO - __main__ - step 2000, learning rate 2e-05, average loss 6.9766526222229
+2021-11-27 22:16:36,370 - INFO - __main__ - step 2100, learning rate 2.1e-05, average loss 6.832047939300537
+2021-11-27 22:17:50,301 - INFO - __main__ - step 2200, learning rate 2.2000000000000003e-05, average loss 6.6152849197387695
+2021-11-27 22:19:04,256 - INFO - __main__ - step 2300, learning rate 2.3000000000000003e-05, average loss 6.853947639465332
+2021-11-27 22:20:18,207 - INFO - __main__ - step 2400, learning rate 2.4e-05, average loss 6.770755290985107
+2021-11-27 22:21:32,162 - INFO - __main__ - step 2500, learning rate 2.5e-05, average loss 6.652717113494873
+2021-11-27 22:22:46,133 - INFO - __main__ - step 2600, learning rate 2.6000000000000002e-05, average loss 6.855687141418457
+2021-11-27 22:24:00,086 - INFO - __main__ - step 2700, learning rate 2.7000000000000002e-05, average loss 6.833905220031738
+2021-11-27 22:25:14,037 - INFO - __main__ - step 2800, learning rate 2.8000000000000003e-05, average loss 6.895623683929443
+2021-11-27 22:26:27,984 - INFO - __main__ - step 2900, learning rate 2.9e-05, average loss 6.426770210266113
