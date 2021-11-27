@@ -20,7 +20,7 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-python src/run_no_accelerator.py \
+nohup python src/run_no_accelerator.py \
     --max_train_steps 150000 \
     --steps_to_eval 100000 \
     --steps_to_save 50000 \
@@ -34,8 +34,8 @@ python src/run_no_accelerator.py \
     --dataset_dir $dataset_dir \
     --from_scratch \
     --output_dir $OUTPUT_DIR/$SAVENAME \
-    --per_device_train_batch_size 16 \
-    --per_device_eval_batch_size 16 \
+    --per_device_train_batch_size 30 \
+    --per_device_eval_batch_size 30 \
     --cuda_devices 0 \
     --task_name $TASK \
     --save_final \
@@ -44,4 +44,5 @@ python src/run_no_accelerator.py \
     --mask_task \
     --weight_decay $WD \
     --learning_rate $LR \
-    --num_warmup_steps $WARMUP
+    --num_warmup_steps $WARMUP \
+    > log.log 2>&1 &

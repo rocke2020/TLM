@@ -308,7 +308,7 @@ def get_external_dataset(args):
     return raw_datasets
 
 def preprocess_external(args, raw_datasets, tokenizer, logger):
-    logger.info("preprocessing datasets")
+    logger.info("preprocessing external datasets")
     column_names = raw_datasets["train"].column_names
     text_column_name = "text" if "text" in column_names else column_names[0]
     padding = "max_length"
@@ -386,7 +386,7 @@ def get_model(args, num_labels):
     model.set_args(args)    
     return tokenizer, model
 
-def preprocess(args, model, tokenizer, raw_datasets, num_labels, label_list, logger):
+def preprocess(args, tokenizer, raw_datasets, logger):
     padding = "max_length" if args.pad_to_max_length else False
     def preprocess_function(examples):
         # Tokenize the texts
@@ -436,7 +436,7 @@ def main():
     raw_datasets, label_list, num_labels = get_dataset(args)
     tokenizer, model = get_model(args, num_labels)
     train_dataset, eval_dataset, test_dataset, data_collator, eval_data_collator = preprocess(
-        args, model, tokenizer, raw_datasets, num_labels, label_list, logger)
+        args, tokenizer, raw_datasets, logger)
     
     if args.external_ratio > 1:
         raw_external_dataset = get_external_dataset(args)
@@ -496,7 +496,7 @@ def main():
         checkpoint_dir = args.model_name_or_path
     else:
         checkpoint_dir = None
-    
+    model.to(args.device)
     trainer = Trainer(
         args=args,
         model=model,
