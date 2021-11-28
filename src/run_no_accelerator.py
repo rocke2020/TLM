@@ -338,7 +338,13 @@ def preprocess_external(args, raw_datasets, tokenizer, logger):
             load_from_cache_file=True,
             desc="Running tokenizer on dataset line_by_line",
         )
-    return tokenized_datasets["train"], text_column_name
+
+    # Log a few random samples from the training set:
+    train_dataset = tokenized_datasets["train"]
+    for index in random.sample(range(len(train_dataset)), 3):
+        logger.info(f"Sample {index} of the extral training set: {train_dataset[index]}.")
+
+    return train_dataset, text_column_name
 
 def get_dataset(args):
 
