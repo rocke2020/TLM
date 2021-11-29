@@ -84,7 +84,6 @@ class Trainer:
         for eval_step, batch in enumerate(self.eval_dataloader):
             batch = self._move_to_device(batch)
             outputs = self.model(**batch, return_dict=True, return_loss=False)
-            label_id_list = [label for label in self.label_list]
             logits = outputs.logits
             predictions = logits.argmax(dim=-1)
             ref = batch["cls_labels"]
@@ -108,7 +107,6 @@ class Trainer:
             for eval_step, batch in enumerate(self.test_dataloader):
                 batch = self._move_to_device(batch)
                 outputs = self.model(**batch, return_dict=True, return_loss=False)
-                label_id_list = [label for label in self.label_list]
                 logits = outputs.logits
                 predictions = logits.argmax(dim=-1)
                 ref = batch["cls_labels"]

@@ -68,6 +68,7 @@ class BertForMaskedLM(BertPreTrainedModel):
         return_loss=True,
         cls_labels=None,
     ):
+        # self.config.use_return_dict is True and this logic return_dict is True
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         loss_fct = CrossEntropyLoss()  # -100 index = padding token
         outputs = self.bert(
