@@ -34,8 +34,8 @@ nohup python src/run_no_accelerator.py \
     --dataset_dir $dataset_dir \
     --from_scratch \
     --output_dir $OUTPUT_DIR/$SAVENAME \
-    --per_device_train_batch_size 30 \
-    --per_device_eval_batch_size 30 \
+    --per_device_train_batch_size 24 \
+    --per_device_eval_batch_size 24 \
     --cuda_devices 0 \
     --task_name $TASK \
     --save_final \

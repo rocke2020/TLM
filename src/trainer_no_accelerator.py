@@ -95,13 +95,11 @@ class Trainer:
         eval_metric = self.metric.compute()
         self.logger.info(f"step {self.completed_steps}: {eval_metric}")
         mean_metric = 0.0
-        if self.accelerator.is_main_process:
-            for key in eval_metric:
-                if self.writter is not None:
-                    self.writter.add_scalar(f"eval/dev-{key}", eval_metric[key], self.completed_steps)
-                mean_metric += eval_metric[key]
+        for key in eval_metric:
+            if self.writter is not None:
+                self.writter.add_scalar(f"eval/dev-{key}", eval_metric[key], self.completed_steps)
+            mean_metric += eval_metric[key]
         mean_metric /= len(eval_metric)
-        self.accelerator.wait_for_everyone()
         is_best = False
         if self.best_metric < mean_metric:
             self.best_metric = mean_metric
@@ -120,11 +118,10 @@ class Trainer:
                 )
             eval_metric = self.metric.compute()
             self.logger.info(f"step {self.completed_steps} test: {eval_metric}")
-            if self.accelerator.is_main_process:
-                for key in eval_metric:
-                    if self.writter is not None:
-                        self.writter.add_scalar(f"eval/test-{key}", eval_metric[key], self.completed_steps)
-                    self.test_results = eval_metric[key]
+            for key in eval_metric:
+                if self.writter is not None:
+                    self.writter.add_scalar(f"eval/test-{key}", eval_metric[key], self.completed_steps)
+                self.test_results = eval_metric[key]
         if is_best and self.args.output_dir is not None:
             self.logger.info("best metric on dev set achieved, try to save model checkpoint to {}".format(self.args.output_dir))
             self._save_trained()
@@ -182,7 +179,6 @@ class Trainer:
             self.best_metric = state["best_metric"]
         
         self.logger.info(f"pretrained steps: {self.pre_completed_steps}, best dev metric {self.best_metric}")
-        self.accelerator.wait_for_everyone()
     
     def update(self, tr_loss, loss_step):
         if self.completed_steps % self.args.steps_to_log == 0:
@@ -212,7 +208,6 @@ class Trainer:
                 if os.path.isdir(file_name) and files.startswith('checkpoint-'):
                     checked_step = int(files[11:])
                     if self.completed_steps - checked_step >= self.args.max_ckpts_to_keep * self.args.steps_to_save:
-                        if self.accelerator.is_main_process:
                             shutil.rmtree(file_name)
 
     def train(self):

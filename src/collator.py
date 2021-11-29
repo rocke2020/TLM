@@ -2,10 +2,12 @@ import random
 import warnings
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, NewType, Optional, Tuple, Union
-
+import logging
 import torch
 
 from transformers.tokenization_utils_base import BatchEncoding, PreTrainedTokenizerBase
+
+logger = logging.getLogger(__name__)
 
 @dataclass
 class DataCollatorForLanguageModeling:
@@ -27,7 +29,6 @@ class DataCollatorForLanguageModeling:
     ) -> Dict[str, torch.Tensor]:
         # Handle dict or lists with proper padding and conversion to tensor.
         batch = self.tokenizer.pad(examples, return_tensors="pt", pad_to_multiple_of=self.pad_to_multiple_of)
-
         # If special token mask has been preprocessed, pop it from the dict.
         special_tokens_mask = batch.pop("special_tokens_mask", None)
         batch.pop("id", None)

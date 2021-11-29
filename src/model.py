@@ -99,8 +99,9 @@ class BertForMaskedLM(BertPreTrainedModel):
         mlm_loss = None
         if labels is not None and (self.args.mlm_weight > 0.0 or cls_labels is None):
             assert labels is not None, "mlm without labels!"
+            # shape: batch-size, seq_length, num_labels
             prediction_scores = self.cls(sequence_output)
-            l_shape = labels.shape
+            l_shape = labels.shape  # batch-size, seq_length
             mlm_loss = loss_fct(prediction_scores.view(-1, self.config.vocab_size), labels.view(-1))
         else:
             mlm_loss = self.cls(sequence_output).sum() * 0.0
