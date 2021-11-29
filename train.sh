@@ -1,3 +1,4 @@
+#!/bin/bash
 TASK=sciie
 SCALE=small
 OUTPUT_DIR=./results
