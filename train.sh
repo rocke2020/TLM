@@ -8,6 +8,7 @@ EXTERNAL_RATIO=999
 LR=1e-4
 WD=0.01
 WARMUP=10000
+dataset_dir=/data2/corpus/nlp_corpus/tlm
 
 if [[ $TASK == "imdb" ]]
 then
@@ -24,7 +25,7 @@ accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src
     --steps_to_save 50000 \
     --steps_to_log 100 \
     --external_dataset_name small_external.csv \
-    --preprocessing_num_workers 32 \
+    --preprocessing_num_workers 4 \
     --max_length $MAXLEN \
     --max_ckpts_to_keep 3 \
     --pad_to_max_length \

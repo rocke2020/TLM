@@ -442,6 +442,7 @@ def main():
     accelerator = Accelerator()
     args.device = accelerator.device
     logger = get_logger(args, accelerator)
+    logger.info(f'accelerator.device {accelerator.device}')
     raw_datasets, label_list, num_labels = get_dataset(args)
     tokenizer, model = get_model(args, num_labels)
     train_dataset, eval_dataset, test_dataset, data_collator, eval_data_collator = preprocess(
