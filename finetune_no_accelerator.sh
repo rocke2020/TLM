@@ -20,7 +20,7 @@ fi
 nohup src/run_no_accelerator.py \
     --max_train_steps 30000 \
     --steps_to_eval 1000 \
-    --steps_to_save 100000 \
+    --steps_to_save 50000 \
     --steps_to_log 100 \
     --external_dataset_name small_external.csv \
     --preprocessing_num_workers 4 \
