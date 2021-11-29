@@ -17,7 +17,7 @@ else
 MAXLEN=128
 fi
 
-nohup src/run_no_accelerator.py \
+nohup python src/run_no_accelerator.py \
     --max_train_steps 30000 \
     --steps_to_eval 1000 \
     --steps_to_save 50000 \
@@ -30,8 +30,8 @@ nohup src/run_no_accelerator.py \
     --config_dir yxchar/tlm-${TASK}-${SCALE}-scale \
     --model_name_or_path $OUTPUT_DIR/$SAVENAME/final \
     --output_dir $OUTPUT_DIR/ft-$SAVENAME \
-    --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 16 \
+    --per_device_train_batch_size 24 \
+    --per_device_eval_batch_size 24 \
     --cuda_devices 0 \
     --task_name $TASK \
     --save_final \
@@ -42,4 +42,4 @@ nohup src/run_no_accelerator.py \
     --num_warmup_steps $WARMUP \
     --seed 0 \
     --reset_cls \
-    > log_finetune.log 2>&1 &
+    > log.log 2>&1 &
