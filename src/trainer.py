@@ -18,6 +18,7 @@ class Trainer:
                  eval_dataloader,
                  external_dataloader,
                  logger,
+                 accelerator,
                  metric,
                  label_list,
                  tokenizer,
@@ -37,6 +38,7 @@ class Trainer:
         self.completed_steps = 0
         self.best_metric = 0.0
         self.test_results = 0.0
+        self.accelerator = accelerator
         self.label_list = label_list
         self.metric = metric
         self.tokenizer = tokenizer
