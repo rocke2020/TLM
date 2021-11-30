@@ -19,7 +19,7 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src/run.py \
+accelerate launch --config_file ./accelerate_config/example_dist_config2.yaml src/run_dqc.py \
     --max_train_steps 150000 \
     --steps_to_eval 100000 \
     --steps_to_save 50000 \
@@ -30,6 +30,7 @@ accelerate launch --config_file ./accelerate_config/example_dist_config.yaml src
     --max_ckpts_to_keep 3 \
     --pad_to_max_length \
     --config_dir yxchar/tlm-${TASK}-${SCALE}-scale \
+    --dataset_dir $dataset_dir \
     --from_scratch \
     --output_dir $OUTPUT_DIR/$SAVENAME \
     --per_device_train_batch_size 24 \
