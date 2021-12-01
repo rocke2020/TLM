@@ -19,7 +19,7 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-accelerate launch --config_file ./accelerate_config/example_dist_config2.yaml src/run_dqc.py \
+nohup accelerate launch --config_file ./accelerate_config/example_dist_config2.yaml src/run_dqc.py \
     --max_train_steps 150000 \
     --steps_to_eval 100000 \
     --steps_to_save 50000 \
@@ -43,4 +43,5 @@ accelerate launch --config_file ./accelerate_config/example_dist_config2.yaml sr
     --mask_task \
     --weight_decay $WD \
     --learning_rate $LR \
-    --num_warmup_steps $WARMUP
+    --num_warmup_steps $WARMUP \
+    > log.log 2>&1 &

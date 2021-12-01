@@ -272,7 +272,6 @@ def get_logger(args, accelerator):
         datefmt="%m/%d/%Y %H:%M:%S",
         level=logging.INFO,
     )
-    logger.info(accelerator.state)
 
     # Setup logging, we only want one process per machine to log things on the screen.
     # accelerator.is_local_main_process is only True for one process per machine.
@@ -394,7 +393,7 @@ def get_model(args, num_labels):
     model.set_args(args)    
     return tokenizer, model
 
-def preprocess(args, model, tokenizer, raw_datasets, num_labels, label_list, logger, accelerator):
+def preprocess(args, tokenizer, raw_datasets, logger):
     padding = "max_length" if args.pad_to_max_length else False
     def preprocess_function(examples):
         # Tokenize the texts
@@ -446,7 +445,7 @@ def main():
     raw_datasets, label_list, num_labels = get_dataset(args)
     tokenizer, model = get_model(args, num_labels)
     train_dataset, eval_dataset, test_dataset, data_collator, eval_data_collator = preprocess(
-        args, model, tokenizer, raw_datasets, num_labels, label_list, logger, accelerator)
+        args, tokenizer, raw_datasets, logger)
     
     if args.external_ratio > 1:
         raw_external_dataset = get_external_dataset(args)
